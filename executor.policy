@@ -22,7 +22,7 @@ grant codeBase "file:%%LIB_DIR%%/jackson-databind-2.10.0.jar"{
 grant {
   permission java.io.FilePermission "%%GENERATED%%", "read", "modifyThread";
   permission java.io.FilePermission "%%GENERATED%%/*", "read", "modifyThread";
-  permission java.util.PropertyPermission "com.fasterxml.jackson.core.util.BufferRecyclers.trackReusableBuffers", , "modifyThread", "read";
+  permission java.util.PropertyPermission "com.fasterxml.jackson.core.util.BufferRecyclers.trackReusableBuffers", "modifyThread", "read";
 };
 
 grant codeBase "file:%%LIB_DIR%%/executors.jar"{
