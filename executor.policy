@@ -1,22 +1,22 @@
 grant codeBase "file:%%LIB_DIR%%/jackson-annotations-2.10.0.jar"{
-  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
-  permission java.lang.RuntimePermission "setIO";
-  permission java.io.FilePermission "<<ALL FILES>>", "read";
-  permission java.lang.RuntimePermission "accessDeclaredMembers";
+  permission java.lang.reflect.ReflectPermission "suppressAccessChecks", "modifyThread";
+  permission java.lang.RuntimePermission "setIO", "modifyThread";
+  permission java.io.FilePermission "<<ALL FILES>>", "read", "modifyThread";
+  permission java.lang.RuntimePermission "accessDeclaredMembers", "modifyThread";
 };
 
 grant codeBase "file:%%LIB_DIR%%/jackson-core-2.10.0.jar"{
-  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
-  permission java.lang.RuntimePermission "setIO";
-  permission java.io.FilePermission "<<ALL FILES>>", "read";
-  permission java.lang.RuntimePermission "accessDeclaredMembers";
+  permission java.lang.reflect.ReflectPermission "suppressAccessChecks", "modifyThread";
+  permission java.lang.RuntimePermission "setIO", "modifyThread";
+  permission java.io.FilePermission "<<ALL FILES>>", "read", "modifyThread";
+  permission java.lang.RuntimePermission "accessDeclaredMembers", "modifyThread";
 };
 
 grant codeBase "file:%%LIB_DIR%%/jackson-databind-2.10.0.jar"{
-  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
-  permission java.lang.RuntimePermission "setIO";
-  permission java.io.FilePermission "<<ALL FILES>>", "read";
-  permission java.lang.RuntimePermission "accessDeclaredMembers";
+  permission java.lang.reflect.ReflectPermission "suppressAccessChecks", "modifyThread";
+  permission java.lang.RuntimePermission "setIO", "modifyThread";
+  permission java.io.FilePermission "<<ALL FILES>>", "read", "modifyThread";
+  permission java.lang.RuntimePermission "accessDeclaredMembers", "modifyThread";
 };
 
 grant {
@@ -33,8 +33,8 @@ grant codeBase "file:%%LIB_DIR%%/executors.jar"{
 };
 
 grant codeBase "file:%%LIB_DIR%%/junit-4.12.jar"{
-  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
-  permission java.lang.RuntimePermission "setIO";
-  permission java.io.FilePermission "<<ALL FILES>>", "read";
-  permission java.lang.RuntimePermission "accessDeclaredMembers";
+  permission java.lang.reflect.ReflectPermission "suppressAccessChecks", "modifyThread";
+  permission java.lang.RuntimePermission "setIO", "modifyThread";
+  permission java.io.FilePermission "<<ALL FILES>>", "read", "modifyThread";
+  permission java.lang.RuntimePermission "accessDeclaredMembers", "modifyThread";
 };
