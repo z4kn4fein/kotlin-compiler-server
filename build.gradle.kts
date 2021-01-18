@@ -43,6 +43,7 @@ plugins {
     id("org.springframework.boot") version "2.4.1"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
     kotlin("jvm") version "1.4.20-release-327"
+    kotlin("kapt") version "1.4.20-release-327"
     kotlin("plugin.spring") version "1.4.20-release-327"
 }
 
@@ -72,7 +73,7 @@ dependencies {
     kotlinDependency("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.2")
     kotlinJsDependency("org.jetbrains.kotlin:kotlin-stdlib-js:$kotlinVersion")
 
-    annotationProcessor("org.springframework:spring-context-indexer")
+    kapt("org.springframework:spring-context-indexer")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.amazonaws.serverless:aws-serverless-java-container-springboot2:1.5.2")
     implementation("junit:junit:4.12")
