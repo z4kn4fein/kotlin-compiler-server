@@ -20,4 +20,4 @@ jobs:
         push: true
         tags: |
           pcsajtai/kotlin-server:latest
-          pcsajtai/kotlin-server:${{ env.VERSION }}
+          pcsajtai/kotlin-server:${{ github.run_number }}
