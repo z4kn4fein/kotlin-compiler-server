@@ -5,7 +5,7 @@ WORKDIR /kotlin-compiler-server
 ADD . /kotlin-compiler-server
 
 RUN ./gradlew build -x test
-RUN mkdir -p /build/libs && (cd /build/libs;  jar -xf /kotlin-compiler-server/build/libs/*.jar)
+RUN mkdir -p /build/libs && (cd /build/libs;  jar -xf /kotlin-compiler-server/build/libs/kotlin-compiler-server-1.6.10-SNAPSHOT.jar)
 
 FROM openjdk:8-jdk-alpine
 
