@@ -78,7 +78,8 @@ dependencies {
     kotlinDependency("com.fasterxml.jackson.core:jackson-core:2.13.0")
     kotlinDependency("com.fasterxml.jackson.core:jackson-annotations:2.13.0")
 
-    kotlinDependency("io.github.z4kn4fein:semver:1.2.1")
+    kotlinDependency("io.github.z4kn4fein:semver:1.3.0")
+    kotlinDependency("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     // Kotlin libraries
     kotlinDependency("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
