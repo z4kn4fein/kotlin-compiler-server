@@ -19,12 +19,10 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.config.languageVersionSettings
 import org.jetbrains.kotlin.ir.backend.js.jsPhases
-import org.jetbrains.kotlin.ir.backend.js.jsResolveLibraries
 import org.jetbrains.kotlin.js.config.JSConfigurationKeys
 import org.jetbrains.kotlin.serialization.js.JsModuleDescriptor
 import org.jetbrains.kotlin.serialization.js.KotlinJavascriptSerializationUtil
 import org.jetbrains.kotlin.serialization.js.ModuleKind
-import org.jetbrains.kotlin.util.Logger
 import org.jetbrains.kotlin.utils.KotlinJavascriptMetadataUtils
 import java.io.File
 
@@ -41,13 +39,14 @@ class KotlinEnvironment(
      * [org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments] for list of possible flags
      */
     private val additionalCompilerArguments: List<String> = listOf(
-      "-Xuse-experimental=kotlin.ExperimentalStdlibApi",
-      "-Xuse-experimental=kotlin.time.ExperimentalTime",
-      "-Xuse-experimental=kotlin.Experimental",
-      "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes",
-      "-Xuse-experimental=kotlin.contracts.ExperimentalContracts",
-      "-Xuse-experimental=kotlin.experimental.ExperimentalTypeInference",
-      "-XXLanguage:+InlineClasses"
+      "-opt-in=kotlin.ExperimentalStdlibApi",
+      "-opt-in=kotlin.time.ExperimentalTime",
+      "-opt-in=kotlin.RequiresOptIn",
+      "-opt-in=kotlin.ExperimentalUnsignedTypes",
+      "-opt-in=kotlin.contracts.ExperimentalContracts",
+      "-opt-in=kotlin.experimental.ExperimentalTypeInference",
+      "-Xcontext-receivers",
+      "-XXLanguage:+RangeUntilOperator"
     )
   }
 
@@ -88,20 +87,6 @@ class KotlinEnvironment(
   }
 
   val jsIrPhaseConfig = createPhaseConfig(jsPhases, K2JsIrCompiler().createArguments(), messageCollector)
-
-  val jsIrResolvedLibraries = jsResolveLibraries(
-    JS_LIBRARIES,
-    emptyList(),
-    object : Logger {
-      override fun error(message: String) {}
-      override fun fatal(message: String): Nothing {
-        TODO("Fake logger for compiler server")
-      }
-
-      override fun log(message: String) {}
-      override fun warning(message: String) {}
-    }
-  )
 
   private val environment = KotlinCoreEnvironment.createForProduction(
     parentDisposable = Disposer.newDisposable(),

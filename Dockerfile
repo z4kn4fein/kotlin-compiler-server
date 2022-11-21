@@ -1,7 +1,7 @@
-FROM openjdk:8-jdk-alpine as build
+FROM openjdk:11.0.16-jdk as build
 
-ENV KOTLIN_LIB=1.7.0-Beta
-ENV KOTLIN_LIB_JS=1.7.0-Beta-js
+ENV KOTLIN_LIB=1.8.0-Beta
+ENV KOTLIN_LIB_JS=1.8.0-Beta-js
 
 RUN mkdir -p /kotlin-compiler-server
 WORKDIR /kotlin-compiler-server
@@ -10,7 +10,7 @@ ADD . /kotlin-compiler-server
 RUN ./gradlew build -x test
 RUN mkdir -p /build/libs && (cd /build/libs;  jar -xf /kotlin-compiler-server/build/libs/kotlin-compiler-server-${KOTLIN_LIB}-SNAPSHOT.jar)
 
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11.0.16-jdk
 
 RUN mkdir /kotlin-compiler-server
 WORKDIR /kotlin-compiler-server

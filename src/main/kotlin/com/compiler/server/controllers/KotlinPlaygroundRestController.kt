@@ -34,7 +34,7 @@ class KotlinPlaygroundRestController(private val kotlinProjectExecutor: KotlinPr
     val result = when (type) {
       "getKotlinVersions" -> listOf(kotlinProjectExecutor.getVersion())
       else -> {
-        if (project == null) throw error("No parameter 'project' found")
+        if (project == null) error("No parameter 'project' found")
         when (type) {
           "run" -> {
             when (project.confType) {
@@ -44,13 +44,15 @@ class KotlinPlaygroundRestController(private val kotlinProjectExecutor: KotlinPr
               ProjectType.JUNIT -> kotlinProjectExecutor.test(project)
             }
           }
+
           "highlight" -> kotlinProjectExecutor.highlight(project)
           "complete" -> {
             if (line != null && ch != null) {
               kotlinProjectExecutor.complete(project, line, ch)
-            } else throw error("No parameters 'line' or 'ch'")
+            } else error("No parameters 'line' or 'ch'")
           }
-          else -> throw error("No parameter 'type' found")
+
+          else -> error("No parameter 'type' found")
         }
       }
     }

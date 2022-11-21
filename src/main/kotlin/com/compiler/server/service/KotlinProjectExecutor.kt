@@ -1,24 +1,18 @@
 package com.compiler.server.service
 
 import com.compiler.server.compiler.KotlinFile
-import com.compiler.server.compiler.components.CompletionProvider
-import com.compiler.server.compiler.components.ErrorAnalyzer
-import com.compiler.server.compiler.components.KotlinCompiler
-import com.compiler.server.compiler.components.KotlinToJSTranslator
+import com.compiler.server.compiler.components.*
 import com.compiler.server.model.ErrorDescriptor
 import com.compiler.server.model.ExecutionResult
 import com.compiler.server.model.Project
 import com.compiler.server.model.TranslationJSResult
 import com.compiler.server.model.bean.VersionInfo
-import com.compiler.server.utils.LoggerHelper
 import component.KotlinEnvironment
 import model.Completion
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.psi.KtFile
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import kotlin.reflect.KFunction3
 
 @Component
 class KotlinProjectExecutor(
@@ -28,7 +22,7 @@ class KotlinProjectExecutor(
   private val version: VersionInfo,
   private val kotlinToJSTranslator: KotlinToJSTranslator,
   private val kotlinEnvironment: KotlinEnvironment,
-  @Value("\${executor.logs}") private val executorLogs: Boolean
+  private val loggerDetailsStreamer: LoggerDetailsStreamer? = null,
 ) {
 
   private val log = LoggerFactory.getLogger(KotlinProjectExecutor::class.java)
@@ -89,7 +83,7 @@ class KotlinProjectExecutor(
 
   private fun convertJsWithConverter(
     project: Project,
-    converter: KFunction3<List<KtFile>, List<String>, KotlinCoreEnvironment, TranslationJSResult>
+    converter: (List<KtFile>, List<String>, KotlinCoreEnvironment) -> TranslationJSResult
   ): TranslationJSResult {
     return kotlinEnvironment.environment { environment ->
       val files = getFilesFrom(project, environment).map { it.kotlinFile }
@@ -103,8 +97,7 @@ class KotlinProjectExecutor(
   }
 
   private fun logExecutionResult(project: Project, executionResult: ExecutionResult) {
-    if (executorLogs.not()) return
-    LoggerHelper.logExecutionResult(
+    loggerDetailsStreamer?.logExecutionResult(
       executionResult,
       project.confType,
       getVersion().version

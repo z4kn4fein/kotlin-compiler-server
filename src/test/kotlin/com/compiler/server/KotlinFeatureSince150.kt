@@ -59,10 +59,10 @@ class KotlinFeatureSince150 : BaseExecutorTest() {
                 ex3(Result.success(3)) // doesn't work
             }
                 """.trimIndent(),
-                contains = "Ex 1\n" +
-                        "Ex 2\n" +
-                        "Ex 3"
-        ).assertNoErrors()
+      contains = "Ex 1\n" +
+        "Ex 2\n" +
+        "Ex 3"
+    ).assertNoErrors()
   }
 
   @Test
@@ -208,4 +208,20 @@ class KotlinFeatureSince150 : BaseExecutorTest() {
     )
   }
 
+
+  @Test
+  fun `Inline classes are Stable`() {
+    run(
+      code = """
+          @JvmInline
+          value class Hours(val value: Int)
+
+          fun main(args: Array<String>) {
+          	val hours = Hours(12)
+              println(hours.value)
+          }
+        """.trimIndent(),
+      contains = "12"
+    )
+  }
 }
