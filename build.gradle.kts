@@ -81,7 +81,7 @@ dependencies {
     kotlinDependency("com.fasterxml.jackson.core:jackson-core:$jacksonVersionKotlinDependencyJar")
     kotlinDependency("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersionKotlinDependencyJar")
 
-    kotlinDependency("io.github.z4kn4fein:semver:1.4.0")
+    kotlinDependency("io.github.z4kn4fein:semver:1.4.1")
     kotlinDependency("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
     kotlinDependency("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
