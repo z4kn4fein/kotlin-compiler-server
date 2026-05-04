@@ -118,6 +118,8 @@ dependencies {
     kotlinJsDependency(libs.kotlin.dom.api.compat)
     kotlinWasmDependency(libs.kotlin.stdlib.wasm.js)
 
+    kotlinDependency("io.github.z4kn4fein:semver:3.1.0")
+
     // compose
     kotlinComposeWasmDependency(libs.kotlin.stdlib.wasm.js)
     kotlinComposeWasmDependency(libs.bundles.compose)
