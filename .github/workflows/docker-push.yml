@@ -1,7 +1,7 @@
 name: docker-push.yml
 on:
   push:
-    branches: [ master ]
+    branches: [ pub ]
 
 jobs:
   push:
